@@ -9,12 +9,11 @@ on:
 jobs:
 
   test:
-    name: Test on go ${{matrix.go_version}} and ${{matrix.os}}
-    runs-on: ${{matrix.os}}
+    name: Test on go ${{matrix.go_version}}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         go_version: ['1.18', '1.17', '>=1.18']
-        os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Go ${{matrix.go_version}}
@@ -35,13 +34,12 @@ jobs:
       run: go build -v main.go
       
   build:
-    name: Build on go ${{matrix.go_version}} and ${{matrix.os}}
+    name: Build on go ${{matrix.go_version}}
     needs: test
-    runs-on: ${{matrix.os}}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         go_version: ['1.18', '1.17', '>=1.18']
-        os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
     - uses: actions/checkout@v3
     - name: Build
